@@ -1,5 +1,5 @@
-import ICompany from './output/ICompany';
+import IAccessAuth from './output/IAccessAuth';
 
 export default interface ICompanyRepository {
-  findCompanyById(companyId: string): Promise<ICompany | null>
+  findCompanyById(companyId: number): Promise<IAccessAuth | null>
 }
