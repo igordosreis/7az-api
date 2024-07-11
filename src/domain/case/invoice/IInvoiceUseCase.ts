@@ -1,5 +1,6 @@
 import IPlanIdAndIdRequest from '@domain/integration/invoice/input/IPlanAndIdRequest';
+import IInvoice from '@domain/integration/invoice/output/IInvoice';
 
 export default interface IInvoiceUseCase {
-  findOne(input: IPlanIdAndIdRequest): Promise<void>
+  findAll(input: IPlanIdAndIdRequest): Promise<IInvoice[]>
 }
