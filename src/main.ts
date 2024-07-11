@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import GlobalExceptionFilter from '@infra/exception/GlobalExceptionFilter';
 import AppModule from './AppModule';
