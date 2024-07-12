@@ -5,7 +5,7 @@ import IInvoiceDetail from '@domain/integration/invoice/output/IInvoiceDetail';
 import IAccessAuth from '@domain/repository/company/output/IAccessAuth';
 import { HttpService } from '@nestjs/axios';
 import { AxiosRequestConfig } from 'axios';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import IInvoiceExternal from './dto/input/IInvoiceExternal';
 import InvoiceDTO from './dto/InvoiceDTO';
 import IInvoicePaymentExternal from './dto/input/IInvoicePaymentExternal';
@@ -74,7 +74,7 @@ export default class InvoiceIntegration implements IInvoiceIntegration {
     const invoiceData = (await this._fetchInvoices(token, cpf))
       .find(({ erpInvoiceId }) => erpInvoiceId === invoiceId);
     const isInvoiceNotFound = !invoiceData;
-    if (isInvoiceNotFound) throw new Error('Invoice not found');
+    if (isInvoiceNotFound) throw new NotFoundException('Invoice not found');
 
     const invoice = new InvoiceDTO(invoiceData, invoicePaymentData);
 

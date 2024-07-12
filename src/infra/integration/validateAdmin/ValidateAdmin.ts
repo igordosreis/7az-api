@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AxiosRequestConfig } from 'axios';
 import { IncomingHttpHeaders } from 'http';
 
@@ -23,7 +23,7 @@ class ValidateAdmin {
     try {
       await this._httpService.axiosRef.post(url, body, config);
     } catch {
-      throw new Error('Validation failed.');
+      throw new UnauthorizedException('Token validation failed.');
     }
   };
 }
