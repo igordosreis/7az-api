@@ -1,4 +1,5 @@
 import EPaymentStatus from '@domain/adapter/global/model/EPaymentStatus';
+import DateUtil from '@infra/integration/util/DateUtil';
 import IInvoiceExternal from './input/IInvoiceExternal';
 import IInvoicePaymentExternal from './input/IInvoicePaymentExternal';
 
@@ -24,7 +25,7 @@ export default class InvoiceDTO {
     this.id = data.erpInvoiceId;
     this.planId = data.erpContractId;
     this.status = this._statusHandler[data.status];
-    this.dueDate = data.formatedDueDate;
+    this.dueDate = DateUtil.formatToIso(data.dueDate);
     this.value = `${data.amount}`;
     this.paidAt = null;
     this.billet = paymentData?.invoicePDFURL || null;
