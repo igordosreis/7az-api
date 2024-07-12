@@ -1,6 +1,6 @@
 import ICompanyRepository from '@domain/repository/company/ICompanyRepository';
 import IAccessAuth from '@domain/repository/company/output/IAccessAuth';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import Prisma from './Prisma';
 import AccessAuthDBO from './dbo/AccessAuthDbo';
 
@@ -10,12 +10,13 @@ export default class CompanyRepository implements ICompanyRepository {
     private readonly _prisma: Prisma,
   ) {}
   
-  public async findCompanyById(companyId: number): Promise<IAccessAuth | null> {
+  public async findCompanyById(companyId: number): Promise<IAccessAuth> {
     const company = await this._prisma.company.findUnique({
       where: { id: companyId },
     });
 
-    if (!company) return null;
+    const isAccessAuthNotFound = !company;
+    if (isAccessAuthNotFound) throw new NotFoundException('Company not found.');
 
     const accessAuth = new AccessAuthDBO(company);
 

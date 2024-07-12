@@ -5,7 +5,6 @@ import IPlanIdRequest from '@domain/integration/invoice/input/IPlanIdRequest';
 import IInvoice from '@domain/integration/invoice/output/IInvoice';
 import IInvoiceDetail from '@domain/integration/invoice/output/IInvoiceDetail';
 import ICompanyRepository from '@domain/repository/company/ICompanyRepository';
-import { NotFoundException } from '@nestjs/common';
 
 export default class InvoiceUseCase implements IInvoiceUseCase {
   constructor(
@@ -22,8 +21,6 @@ export default class InvoiceUseCase implements IInvoiceUseCase {
     } = input;
     
     const accessAuth = await this._companyRepository.findCompanyById(companyId);
-    const isAccessAuthNotFound = !accessAuth;
-    if (isAccessAuthNotFound) throw new NotFoundException('Company not found.');
 
     const invoices = (await this._invoiceIntegration.findAll(accessAuth, input))
       .filter((invoice) => invoice.planId === planId);
@@ -39,8 +36,6 @@ export default class InvoiceUseCase implements IInvoiceUseCase {
     } = input;
 
     const accessAuth = await this._companyRepository.findCompanyById(companyId);
-    const isAccessAuthNotFound = !accessAuth;
-    if (isAccessAuthNotFound) throw new NotFoundException('Company not found.');
 
     const invoice = this._invoiceIntegration.findOne(accessAuth, input);
 
