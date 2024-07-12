@@ -5,10 +5,12 @@ import IInvoiceDetail from '@domain/integration/invoice/output/IInvoiceDetail';
 import IAccessAuth from '@domain/repository/company/output/IAccessAuth';
 import { HttpService } from '@nestjs/axios';
 import { AxiosRequestConfig } from 'axios';
+import { Injectable } from '@nestjs/common';
 import IInvoiceExternal from './dto/input/IInvoiceExternal';
 import InvoiceDTO from './dto/InvoiceDTO';
 import IInvoicePaymentExternal from './dto/input/IInvoicePaymentExternal';
 
+@Injectable()
 export default class InvoiceIntegration implements IInvoiceIntegration {
   private readonly BASE_URL = 'https://api.7az.com.br/v2/integrations/omnichannel/invoices';
 

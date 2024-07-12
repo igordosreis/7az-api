@@ -5,7 +5,9 @@ import { IncomingHttpHeaders } from 'http';
 
 @Injectable()
 class ValidateAdmin {
-  constructor(private readonly _httpService: HttpService) {}
+  constructor(
+    private readonly _httpService: HttpService,
+  ) {}
 
   validate = async (headers: IncomingHttpHeaders): Promise<void> => {
     const url = `${process.env.GLOBAL_API_URL}/microservices/validations/microservice`;
@@ -21,7 +23,7 @@ class ValidateAdmin {
     try {
       await this._httpService.axiosRef.post(url, body, config);
     } catch {
-      throw new Error();
+      throw new Error('Validation failed.');
     }
   };
 }

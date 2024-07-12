@@ -1,8 +1,10 @@
 import ICompanyRepository from '@domain/repository/company/ICompanyRepository';
 import IAccessAuth from '@domain/repository/company/output/IAccessAuth';
+import { Injectable } from '@nestjs/common';
 import Prisma from './Prisma';
 import AccessAuthDBO from './dbo/AccessAuthDbo';
 
+@Injectable()
 export default class CompanyRepository implements ICompanyRepository {
   constructor(
     private readonly _prisma: Prisma,
