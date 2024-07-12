@@ -12,7 +12,7 @@ import IInvoicePaymentExternal from './dto/input/IInvoicePaymentExternal';
 
 @Injectable()
 export default class InvoiceIntegration implements IInvoiceIntegration {
-  private readonly BASE_URL = 'https://api.7az.com.br/v2/integrations/omnichannel/invoices';
+  private readonly BASE_URL = process.env.BASE_API_URL;
 
   constructor(
     private readonly _httpService: HttpService,
