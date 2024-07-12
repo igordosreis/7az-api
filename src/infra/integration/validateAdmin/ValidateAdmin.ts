@@ -8,7 +8,7 @@ class ValidateAdmin {
   constructor(private readonly _httpService: HttpService) {}
 
   validate = async (headers: IncomingHttpHeaders): Promise<void> => {
-    const url = `${process.env.GLOBAL_API_URL}/microservices/validations/dashboard`;
+    const url = `${process.env.GLOBAL_API_URL}/microservices/validations/microservice`;
     const body = { 
       token: headers.authorization,
     };

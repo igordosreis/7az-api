@@ -1,5 +1,6 @@
 import EPaymentStatus from '@domain/adapter/global/model/EPaymentStatus';
 import IInvoiceExternal from './input/IInvoiceExternal';
+import IInvoicePaymentExternal from './input/IInvoicePaymentExternal';
 
 export default class InvoiceDTO {
   id: string;
@@ -19,15 +20,15 @@ export default class InvoiceDTO {
     93: EPaymentStatus.expired, // check other possibly status and their meaning
   };
 
-  constructor(data: IInvoiceExternal) {
+  constructor(data: IInvoiceExternal, paymentData?: IInvoicePaymentExternal) {
     this.id = data.erpInvoiceId;
     this.planId = data.erpContractId;
     this.status = this._statusHandler[data.status];
     this.dueDate = data.formatedDueDate;
     this.value = `${data.amount}`;
     this.paidAt = null;
-    this.billet = null;
-    this.billetCode = null;
-    this.pixQRCode = null;
+    this.billet = paymentData?.invoicePDFURL || null;
+    this.billetCode = paymentData?.billetDigitableLine || null;
+    this.pixQRCode = paymentData?.pixCode || null;
   }
 }
