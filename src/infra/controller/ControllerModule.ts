@@ -5,7 +5,7 @@ import InvoiceControllerModule from './invoice/InvoiceControllerModule';
 
 const routes: Routes = [
   {
-    path: '7az/invoice',
+    path: 'isp/invoice',
     module: InvoiceControllerModule,
   },
 ];
