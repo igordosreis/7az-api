@@ -4,7 +4,7 @@ import IPlanIdRequest from '@domain/integration/invoice/input/IPlanIdRequest';
 import IInvoice from '@domain/integration/invoice/output/IInvoice';
 import IInvoiceDetail from '@domain/integration/invoice/output/IInvoiceDetail';
 import ValidateAdmin from '@infra/integration/validateAdmin/ValidateAdmin';
-import { Body, Controller, Get, Headers, Param } from '@nestjs/common';
+import { Body, Controller, Post, Headers, Param } from '@nestjs/common';
 import { IncomingHttpHeaders } from 'http';
 
 @Controller()
@@ -14,7 +14,7 @@ export default class InvoiceController {
     private readonly _adminAuth: ValidateAdmin,
   ) {}
 
-  @Get()
+  @Post()
   async findAll(
     @Headers() headers: IncomingHttpHeaders,
       @Body() body: IPlanIdRequest,
@@ -26,7 +26,7 @@ export default class InvoiceController {
     return invoices;
   }
 
-  @Get('/:id')
+  @Post('/:id')
   async findOne(
     @Headers() headers: IncomingHttpHeaders,
       @Param('id') _id: string,
