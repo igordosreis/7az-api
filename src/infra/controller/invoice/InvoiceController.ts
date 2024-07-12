@@ -1,11 +1,11 @@
 import InvoiceUseCase from '@app/invoice/InvoiceUseCase';
-import IPlanIdAndIdRequest from '@domain/integration/invoice/input/IPlanAndIdRequest';
-import IPlanIdRequest from '@domain/integration/invoice/input/IPlanIdRequest';
 import IInvoice from '@domain/integration/invoice/output/IInvoice';
 import IInvoiceDetail from '@domain/integration/invoice/output/IInvoiceDetail';
 import ValidateAdmin from '@infra/integration/validateAdmin/ValidateAdmin';
 import { Body, Controller, Post, Headers, Param } from '@nestjs/common';
 import { IncomingHttpHeaders } from 'http';
+import { IPlanIdRequestDTO } from './dto/IPlanIdRequestDTO';
+import { IPlanIdAndIdRequestDTO } from './dto/IPlanIdAndIdRequest';
 
 @Controller()
 export default class InvoiceController {
@@ -17,7 +17,7 @@ export default class InvoiceController {
   @Post()
   async findAll(
     @Headers() headers: IncomingHttpHeaders,
-      @Body() body: IPlanIdRequest,
+      @Body() body: IPlanIdRequestDTO,
   ): Promise<IInvoice[]> {
     await this._adminAuth.validate(headers);
 
@@ -30,7 +30,7 @@ export default class InvoiceController {
   async findOne(
     @Headers() headers: IncomingHttpHeaders,
       @Param('id') _id: string,
-      @Body() body: IPlanIdAndIdRequest,
+      @Body() body: IPlanIdAndIdRequestDTO,
   ): Promise<IInvoiceDetail> {
     await this._adminAuth.validate(headers);
 
